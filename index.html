@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia Prático: Git & GitHub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Guia Prático: Git & GitHub</h1>
+    <p>Conceitos essenciais, fluxos de trabalho e resolução de conflitos</p>
+  </header>
+
+  <main>
+    <section id="conceitos">
+      <h2>Conceitos de Git & GitHub</h2>
+      <ul>
+        <li><strong>Git</strong>: sistema de controle de versão distribuído.</li>
+        <li><strong>Repositório</strong>: pasta com histórico versionado.</li>
+        <li><strong>Commit</strong>: foto do seu código em um momento (mensagem clara!).</li>
+        <li><strong>Remote</strong>: repositório hospedado (ex.: GitHub).</li>
+        <li><code>git clone</code>, <code>git add</code>, <code>git commit</code>, <code>git push</code>, <code>git pull</code>.</li>
+      </ul>
+    </section>
+
+    <section id="fluxos">
+      <h2>Fluxos de Trabalho (Git/GitHub)</h2>
+      <p><strong>GitHub Flow</strong>: <code>main</code> estável → criar branch de feature → PR → review → merge → deploy.</p>
+      <p><strong>Nosso fluxo neste projeto</strong>:</p>
+      <ol>
+        <li>Branches principais: <code>main</code> e <code>develop</code>.</li>
+        <li>Features em <code>feat/alguma-coisa</code> → PR para <code>develop</code>.</li>
+        <li>Após 3 PRs aceitos: PR de <code>develop</code> → <code>main</code> → deploy.</li>
+      </ol>
+    </section>
+
+    <section id="conflitos">
+      <h2>Como Resolver Conflitos</h2>
+      <ol>
+        <li>Atualize sua branch: <code>git fetch origin</code> e <code>git merge origin/develop</code> (ou <code>rebase</code>).</li>
+        <li>Abra os arquivos marcados com conflitos <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> / <code>=======</code> / <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+        <li>Edite escolhendo o conteúdo final e salve.</li>
+        <li>Marque como resolvido: <code>git add</code>.</li>
+        <li>Finalize: <code>git commit</code> (merge) ou <code>git rebase --continue</code> (rebase).</li>
+      </ol>
+      <p><em>Dica:</em> prefira mensagens de commit claras e pequenas mudanças por PR.</p>
+    </section>
+  </main>
+
+  <footer>
+    <small>Feito por Gabriel • Deploy via GitHub Pages</small>
+  </footer>
+</body>
+</html>
