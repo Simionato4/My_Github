@@ -1,3 +1,17 @@
-# My_Github
+# Guia Prático: Git & GitHub
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. Eaque ipsa quae ab illo inventore 88888 et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+## Branches
+- [x] `main` (produção / Pages)
+- [x] `develop` (integração)
+
+## Features (cada uma com PR → develop)
+- [x] `feat/conceitos` – Conceitos básicos (Git, repo, commit, push/pull)
+- [x] `feat/fluxos` – Fluxos de trabalho (branches, PRs, reviews)
+- [x] `feat/conflitos` – Resolução de conflitos (merge/rebase)
+
+## Integração final
+- [x] PR `develop` → `main`
+- [x] Deploy com GitHub Pages (branch `main`, pasta root)
+
+## Como rodar
+Abra `index.html` no navegador.
