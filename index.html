@@ -3,53 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guia Prático: Git & GitHub</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Guia Detalhado — Git & GitHub | Gabriel Simionato</title>
+  <meta name="description" content="Página estática aprofundada com conceitos de Git e GitHub, fluxos de trabalho, pull requests e resolução de conflitos." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Guia Prático: Git & GitHub</h1>
-    <p>Conceitos essenciais, fluxos de trabalho e resolução de conflitos</p>
+    <h1>Guia Detalhado — Git & GitHub</h1>
+    <p>Conceitos, fluxos de trabalho e resolução de conflitos explicados em profundidade</p>
   </header>
-
   <main>
     <section id="conceitos">
-      <h2>Conceitos de Git & GitHub</h2>
+      <h2>Conceitos Fundamentais de Git & GitHub</h2>
+      <p>O <strong>Git</strong> é um sistema de controle de versão distribuído. Isso significa que cada desenvolvedor tem uma cópia completa do repositório, incluindo o histórico, no seu computador. Com isso, é possível trabalhar offline, criar experimentos em branches e integrar mudanças de forma colaborativa.</p>
+      <h3>Principais Conceitos</h3>
       <ul>
-        <li><strong>Git</strong>: sistema de controle de versão distribuído.</li>
-        <li><strong>Repositório</strong>: pasta com histórico versionado.</li>
-        <li><strong>Commit</strong>: foto do seu código em um momento (mensagem clara!).</li>
-        <li><strong>Remote</strong>: repositório hospedado (ex.: GitHub).</li>
-        <li><code>git clone</code>, <code>git add</code>, <code>git commit</code>, <code>git push</code>, <code>git pull</code>.</li>
+        <li><strong>Commit:</strong> uma foto do seu código em determinado momento. É importante escrever mensagens claras, por exemplo: <code>feat: adiciona página inicial</code>.</li>
+        <li><strong>Branch:</strong> uma ramificação do projeto. Serve para desenvolver algo novo sem atrapalhar a versão estável.</li>
+        <li><strong>Merge:</strong> processo de unir mudanças de duas branches.</li>
+        <li><strong>Rebase:</strong> forma de reaplicar commits em cima de outra base, mantendo histórico linear.</li>
+        <li><strong>Remote:</strong> repositório hospedado em um servidor (GitHub, GitLab, Bitbucket).</li>
       </ul>
+      <h3>GitHub</h3>
+      <p>O <strong>GitHub</strong> é uma plataforma que hospeda repositórios Git. Ele adiciona recursos de colaboração como Pull Requests, Code Review, Issues e GitHub Pages (para deploy de sites estáticos).</p>
     </section>
 
     <section id="fluxos">
-      <h2>Fluxos de Trabalho (Git/GitHub)</h2>
-      <p><strong>GitHub Flow</strong>: <code>main</code> estável → criar branch de feature → PR → review → merge → deploy.</p>
-      <p><strong>Nosso fluxo neste projeto</strong>:</p>
+      <h2>Fluxos de Trabalho</h2>
+      <p>Um fluxo define como a equipe organiza suas branches e integra mudanças. O objetivo é evitar caos no histórico e garantir qualidade do código.</p>
+      <h3>GitHub Flow (Simples)</h3>
       <ol>
-        <li>Branches principais: <code>main</code> e <code>develop</code>.</li>
-        <li>Features em <code>feat/alguma-coisa</code> → PR para <code>develop</code>.</li>
-        <li>Após 3 PRs aceitos: PR de <code>develop</code> → <code>main</code> → deploy.</li>
+        <li>Branch principal: <code>main</code> sempre estável.</li>
+        <li>Para cada tarefa, cria-se uma branch: <code>feat/nova-funcionalidade</code>.</li>
+        <li>Após o desenvolvimento, abre-se um Pull Request para <code>main</code>.</li>
+        <li>O código passa por revisão e testes.</li>
+        <li>Se aprovado, faz-se merge e deploy.</li>
       </ol>
+      <div class="callout">Esse fluxo é usado em projetos menores, onde a integração é contínua.</div>
+      <h3>Git Flow (com Develop)</h3>
+      <p>Usado em times maiores. As branches principais são:</p>
+      <ul>
+        <li><code>main</code>: versão de produção.</li>
+        <li><code>develop</code>: integração de features.</li>
+        <li><code>feat/*</code>: desenvolvimento de novas funcionalidades.</li>
+      </ul>
+      <p>No final, <code>develop</code> é mesclada na <code>main</code> para gerar uma versão.</p>
     </section>
 
     <section id="conflitos">
-      <h2>Como Resolver Conflitos</h2>
+      <h2>Resolução de Conflitos</h2>
+      <p>Conflitos acontecem quando duas branches modificam a mesma linha de um arquivo. O Git não sabe qual versão manter, então pede que o desenvolvedor escolha.</p>
+      <h3>Exemplo de Conflito</h3>
+      <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+console.log("Olá da sua branch");
+=======
+console.log("Olá da branch que veio do merge");
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; develop</code></pre>
+      <p>Nesse caso, você precisa editar o arquivo e deixar apenas a linha correta, por exemplo:</p>
+      <pre><code>console.log("Olá final");</code></pre>
+      <h3>Passo a Passo para Resolver</h3>
       <ol>
-        <li>Atualize sua branch: <code>git fetch origin</code> e <code>git merge origin/develop</code> (ou <code>rebase</code>).</li>
-        <li>Abra os arquivos marcados com conflitos <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> / <code>=======</code> / <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
-        <li>Edite escolhendo o conteúdo final e salve.</li>
-        <li>Marque como resolvido: <code>git add</code>.</li>
-        <li>Finalize: <code>git commit</code> (merge) ou <code>git rebase --continue</code> (rebase).</li>
+        <li>Rode <code>git status</code> para ver quais arquivos estão em conflito.</li>
+        <li>Abra os arquivos e procure os marcadores <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+        <li>Escolha qual parte do código manter ou mescle as duas versões.</li>
+        <li>Apague os marcadores e salve o arquivo.</li>
+        <li>Marque como resolvido: <code>git add arquivo</code>.</li>
+        <li>Finalize o merge com <code>git commit</code> ou continue o rebase com <code>git rebase --continue</code>.</li>
       </ol>
-      <p><em>Dica:</em> prefira mensagens de commit claras e pequenas mudanças por PR.</p>
+      <h3>Dicas Importantes</h3>
+      <ul>
+        <li>Faça <code>git pull</code> frequentemente para evitar grandes divergências.</li>
+        <li>Mantenha commits pequenos e focados, isso facilita encontrar onde ocorreu o conflito.</li>
+        <li>Use ferramentas visuais de merge (VS Code, GitKraken, Sourcetree) para simplificar a resolução.</li>
+      </ul>
+    </section>
+
+    <section id="pull-requests">
+      <h2>Pull Requests</h2>
+      <p>Um Pull Request é uma solicitação para mesclar uma branch em outra. Ele permite revisão do código por colegas, testes automatizados e discussão sobre a mudança.</p>
+      <h3>Checklist de um bom PR</h3>
+      <ul>
+        <li>Título claro e descritivo: <code>feat(login): adiciona autenticação de usuários</code>.</li>
+        <li>Descrição do que foi feito e por que.</li>
+        <li>Testes realizados localmente.</li>
+        <li>Sem arquivos irrelevantes no commit.</li>
+      </ul>
+    </section>
+
+    <section id="deploy">
+      <h2>Deploy com GitHub Pages</h2>
+      <p>Após integrar tudo na <code>main</code>, é possível publicar sua página HTML de forma gratuita.</p>
+      <ol>
+        <li>No repositório, vá em <em>Settings &gt; Pages</em>.</li>
+        <li>Selecione <em>Deploy from a branch</em>.</li>
+        <li>Escolha a branch <code>main</code> e a pasta <code>/ (root)</code>.</li>
+        <li>O GitHub gerará uma URL no formato <code>https://usuario.github.io/repositorio/</code>.</li>
+      </ol>
     </section>
   </main>
-
   <footer>
-    <small>Feito por Gabriel • Deploy via GitHub Pages</small>
+    <p>Feito por Gabriel Simionato — Projeto prático sobre Git & GitHub (conceitos, fluxos, PRs e conflitos).</p>
   </footer>
 </body>
 </html>
