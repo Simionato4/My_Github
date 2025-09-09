@@ -1,0 +1,207 @@
+/* ——— Tema claro com header azul escuro ——— */
+/* Troque estas duas cores à vontade */
+:root{
+  --header-bg: #0f172a;   /* <<< Cor do header (azul escuro) */
+  --body-bg:   #f9fafb;   /* <<< Cor de fundo da página (única) */
+
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #64748b;
+
+  --accent:  #0284c7;
+  --accent-2:#f97316;
+  --accent-3:#10b981;
+
+  --border: #e5e7eb;
+  --code:   #f1f5f9;
+  --shadow: 0 8px 24px rgba(15,23,42,0.06);
+
+  /* Cores do “VS Code block” (pode trocar) */
+  --vsc-header: #2d2d2d;
+  --vsc-bg:     #1e1e1e;
+  --vsc-text:   #d4d4d4;
+  --vsc-filename: #cbd5e1;
+}
+
+/* base */
+*{ box-sizing: border-box; }
+html, body{ height:100%; scroll-behavior:smooth; }
+:target{ scroll-margin-top: 96px; }
+
+body{
+  margin:0;
+  color:var(--text);
+  font: 16px/1.7 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--body-bg); /* <<< Fundo único */
+}
+
+/* header */
+header{
+  position: sticky; top:0; z-index: 10;
+  background: var(--header-bg);
+  color: #fff;
+  padding: 28px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+header h1{
+  margin:0 0 6px;
+  font-size: clamp(22px, 2.2vw, 32px);
+  color: #fff;
+}
+header p{ margin:0; color: #cbd5e1; }
+
+/* main / cards */
+main{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+section{
+  position: relative;
+  margin: 22px 0;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* títulos */
+h2{
+  margin: 0 0 18px;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 700;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+h2::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 60%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+h3{
+  margin: 18px 0 8px;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: #334155;
+}
+
+p{ margin: 10px 0; }
+ul, ol{ margin: 12px 0 12px 22px; }
+
+/* callout */
+.callout{
+  position: relative;
+  border-left: 4px solid var(--accent-3);
+  background: #ecfeff;
+  padding: 14px 14px 14px 44px;
+  border-radius: 12px;
+  margin: 14px 0;
+  color: #0f172a;
+  border: 1px solid #d6eef6;
+}
+.callout::before{
+  content:"💡";
+  position:absolute; left:12px; top:12px; font-size: 18px;
+}
+.muted{ color: var(--muted); }
+
+/* bloco de código “VS Code-like”
+   Use <pre class="vscode" data-filename="nome.ext"><code>...</code></pre> */
+pre.vscode{
+  position: relative;
+  background: var(--vsc-bg);
+  color: var(--vsc-text);
+  border-radius: 12px;
+  overflow: auto;
+  border: 1px solid #11182718;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
+  margin: 14px 0;
+}
+/* barra de título */
+pre.vscode::before{
+  content: attr(data-filename);
+  display: block;
+  background: var(--vsc-header);
+  color: var(--vsc-filename);
+  font-size: 12px;
+  letter-spacing: .2px;
+  padding: 8px 40px 8px 80px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: 1px solid #00000030;
+}
+/* “semaforozinho” */
+pre.vscode::after{
+  content:"";
+  position:absolute; top:10px; left:14px; width:10px; height:10px;
+  border-radius:50%;
+  background:#ff5f56;
+  box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #27c93f;
+}
+
+/* área do código */
+pre.vscode code{
+  display:block;
+  padding: 14px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;   /* <<< permite quebrar linhas longas */
+  word-break: break-word;  /* <<< quebra palavras grandes */
+  color: var(--vsc-text);
+}
+
+/* código padrão (caso use <pre> sem a classe vscode) */
+pre{
+  background: var(--code);
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(2,6,23,0.04);
+}
+code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* grid utilitária */
+.grid2{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* links e foco */
+a{ color: var(--accent); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+:focus-visible{
+  outline: 3px solid rgba(14,165,233,.35);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* rodapé */
+footer{
+  text-align:center;
+  color: var(--muted);
+  padding: 32px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--panel);
+}
+
+/* responsivo */
+@media (max-width: 600px){
+  section{ padding:18px; }
+  header{ padding: 20px; }
+}
