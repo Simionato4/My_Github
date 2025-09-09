@@ -12,6 +12,7 @@
     <h1>Guia Detalhado — Git & GitHub</h1>
     <p>Conceitos, fluxos de trabalho e resolução de conflitos explicados em profundidade</p>
   </header>
+
   <main>
     <section id="conceitos">
       <h2>Conceitos Fundamentais de Git & GitHub</h2>
@@ -26,6 +27,19 @@
       </ul>
       <h3>GitHub</h3>
       <p>O <strong>GitHub</strong> é uma plataforma que hospeda repositórios Git. Ele adiciona recursos de colaboração como Pull Requests, Code Review, Issues e GitHub Pages (para deploy de sites estáticos).</p>
+
+      <!-- Exemplo VS Code: Conceitos básicos -->
+      <pre class="vscode" data-filename="terminal — conceitos.sh"><code># inicializa repositório e primeiro commit
+git init
+git add .
+git commit -m "feat: inicia projeto"
+
+# cria e troca para uma nova branch de feature
+git checkout -b feat/pagina-inicial
+
+# trabalha, comita…
+git add index.html
+git commit -m "feat(home): estrutura inicial da página"</code></pre>
     </section>
 
     <section id="fluxos">
@@ -48,6 +62,22 @@
         <li><code>feat/*</code>: desenvolvimento de novas funcionalidades.</li>
       </ul>
       <p>No final, <code>develop</code> é mesclada na <code>main</code> para gerar uma versão.</p>
+
+      <!-- Exemplo VS Code: GitHub Flow na prática -->
+      <pre class="vscode" data-filename="terminal — github-flow.sh"><code># parte de main atualizada
+git checkout main
+git pull origin main
+
+# cria branch da tarefa
+git checkout -b feat/login
+
+# commits…
+git add .
+git commit -m "feat(login): tela e validações"
+
+# publica a branch no remoto e cria PR
+git push -u origin feat/login
+# abra o PR no GitHub e peça review</code></pre>
     </section>
 
     <section id="conflitos">
@@ -76,6 +106,19 @@ console.log("Olá da branch que veio do merge");
         <li>Mantenha commits pequenos e focados, isso facilita encontrar onde ocorreu o conflito.</li>
         <li>Use ferramentas visuais de merge (VS Code, GitKraken, Sourcetree) para simplificar a resolução.</li>
       </ul>
+
+      <!-- Exemplo VS Code: resolvendo conflito pelo terminal -->
+      <pre class="vscode" data-filename="terminal — resolver-conflito.sh"><code># durante um merge:
+git status                 # vê arquivos em conflito
+code app.js                # abre o arquivo no VS Code e resolve manualmente
+git add app.js             # marca como resolvido
+git commit                 # conclui o merge
+
+# durante um rebase:
+git rebase main
+# resolve conflitos...
+git add app.js
+git rebase --continue</code></pre>
     </section>
 
     <section id="pull-requests">
@@ -88,6 +131,16 @@ console.log("Olá da branch que veio do merge");
         <li>Testes realizados localmente.</li>
         <li>Sem arquivos irrelevantes no commit.</li>
       </ul>
+
+      <!-- Exemplo VS Code: criando PR -->
+      <pre class="vscode" data-filename="terminal — pull-request.sh"><code># publicar a branch
+git push -u origin feat/login
+
+# opção 1: abrir PR manualmente no site do GitHub
+# (GitHub mostra o botão "Compare & pull request")
+
+# opção 2: usando GitHub CLI (se tiver instalada)
+# gh pr create --base main --head feat/login --title "feat(login): autenticação" --body "Descrição do que foi feito."</code></pre>
     </section>
 
     <section id="deploy">
@@ -99,8 +152,76 @@ console.log("Olá da branch que veio do merge");
         <li>Escolha a branch <code>main</code> e a pasta <code>/ (root)</code>.</li>
         <li>O GitHub gerará uma URL no formato <code>https://usuario.github.io/repositorio/</code>.</li>
       </ol>
+
+      <!-- Exemplo VS Code: estrutura mínima e push -->
+      <pre class="vscode" data-filename="terminal — deploy-github-pages.sh"><code># garante que a página existe no root
+echo "&lt;!doctype html&gt;&lt;title&gt;Olá Mundo&lt;/title&gt;&lt;h1&gt;Site no GitHub Pages&lt;/h1&gt;" &gt; index.html
+
+git add index.html
+git commit -m "chore: adiciona página inicial"
+git push origin main
+# Depois, configure Settings &gt; Pages: Deploy from a branch (main / root)</code></pre>
+    </section>
+
+    <!-- NOVO: Passo a Passo Final -->
+    <section id="passo-final">
+      <h2>Passo a Passo Final</h2>
+      <p>Um guia rápido para aplicar o fluxo completo com Git e GitHub:</p>
+
+      <ol>
+        <li>Entrar no projeto:</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>cd nome-projeto</code></pre>
+
+      <ol start="2">
+        <li>Checar em qual branch/feature está (locais e remotas):</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>git branch      # locais
+git branch -a   # remotas</code></pre>
+
+      <ol start="3">
+        <li>Visualizar/entrar na branch desejada:</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>git checkout nome-da-branch</code></pre>
+
+      <ol start="4">
+        <li>Atualizar a branch:</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>git pull origin nome-da-branch</code></pre>
+
+      <ol start="5">
+        <li>Se precisar criar uma nova feature:</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>git checkout -b feature/nome-da-nova-feature</code></pre>
+
+      <ol start="6">
+        <li>Fazer alterações e subir as modificações:</li>
+      </ol>
+      <pre class="vscode" data-filename="terminal — passo-final.sh"><code>git add .
+git commit -m "explicando o que eu alterei"
+git push origin nome-da-feature</code></pre>
+
+      <ol start="7">
+        <li>Abrir o Pull Request no GitHub:</li>
+      </ol>
+      <ul>
+        <li>Vá ao repositório → <strong>Pull requests</strong> → <em>New pull request</em>.</li>
+        <li><em>base</em>: branch que recebe o código (ex.: <code>main</code> / <code>develop</code>).</li>
+        <li><em>compare</em>: sua branch de feature (ex.: <code>feature/minha-feature</code>).</li>
+        <li>Revise e clique em <em>Create pull request</em>.</li>
+      </ul>
+
+      <ol start="8">
+        <li>Fazer o merge:</li>
+      </ol>
+      <ul>
+        <li>No PR, clique em <strong>Merge pull request</strong>.</li>
+        <li>Confirme em <strong>Confirm merge</strong>.</li>
+        <li>(Opcional, recomendado) <em>Delete branch</em> para remover a branch da feature.</li>
+      </ul>
     </section>
   </main>
+
   <footer>
     <p>Feito por Gabriel Simionato — Projeto prático sobre Git & GitHub (conceitos, fluxos, PRs e conflitos).</p>
   </footer>
